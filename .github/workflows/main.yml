@@ -31,11 +31,9 @@ jobs:
       - name: Authenticate Snyk
         run: snyk auth ${{ secrets.SNYK_TOKEN }}
 
-      # 👇 Ejecuta Snyk en modo seguro (no bloquea si encuentra vulnerabilidades)
       - name: Run Snyk Scan
         run: snyk test --file=pom.xml || true
 
-      # 👇 Genera el reporte para evidencia de la actividad
       - name: Generate Snyk Report
         run: |
           snyk test --file=pom.xml --json > snyk-report.json || true
@@ -102,8 +100,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           mvn verify sonar:sonar \
-          -Dsonar.projectKey=cbugueno-duoc_bdget-jacoco \
-          -Dsonar.organization=cbugueno-duoc \
+          -Dsonar.projectKey=AntonellaCastillo_bdget-jacoco \
+          -Dsonar.organization=AntonellaCastillo \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.login=$SONAR_TOKEN \
           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
